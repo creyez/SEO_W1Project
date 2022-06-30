@@ -17,8 +17,10 @@ print("Losses: " + str(response[0]["losses"]))
 
 df = pd.DataFrame.from_dict(response)
 #converts dictionary into a pandas dataframe
+print(df)
 
 engine = db.create_engine('sqlite:///data_base_name.db')
 df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
 query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
 print(pd.DataFrame(query_result))
+#converts pandas dataframe to a data base
