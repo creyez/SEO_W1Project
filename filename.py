@@ -10,6 +10,6 @@ response = requests.get(url)
 response = response.json()
 
 print("SummonerName: " + response[0]["summonerName"])
-print("Wins: " + response[0]["wins"])
-print("Losses: " + response[0]["losses"])
+print("Wins: " + str(response[0]["wins"]))
+print("Losses: " + str(response[0]["losses"]))
 
