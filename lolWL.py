@@ -35,6 +35,6 @@ print(pd.DataFrame(query_result))
 # converts pandas dataframe to a data base
 
 
-def testFuction(in):
-       return in
+def testFuction(inp):
+       return inp
 
