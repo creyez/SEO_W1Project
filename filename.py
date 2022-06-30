@@ -20,7 +20,7 @@ df = pd.DataFrame.from_dict(response)
 
 print (df)
 
-# engine = db.create_engine('sqlite:///data_base_name.db')
-# df.to_sql('table_name', con=engine, if_exists='replace', index=False)
-# query_result = engine.execute("SELECT * FROM table;").fetchall()
-# print(pd.DataFrame(query_result))
+engine = db.create_engine('sqlite:///data_base_name.db')
+df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
+query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
+print(pd.DataFrame(query_result))
