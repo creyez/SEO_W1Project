@@ -29,5 +29,5 @@ pip install SQLAlchemy
 ## Badges
 
 
-![example workflow](https://github.com/creyez/SEO_W1Project/actions/workflows/style.yaml/badge.svg)
+![example workflow](https://github.com/creyez/SEO_W1Project/actions/workflows/style.yaml/badge.svg) \
 ![example workflow](https://github.com/creyez/SEO_W1Project/actions/workflows/test.yaml/badge.svg)
