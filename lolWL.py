@@ -33,3 +33,8 @@ df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
 query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
 print(pd.DataFrame(query_result))
 # converts pandas dataframe to a data base
+
+
+def testFuction(in):
+       return in
+
