@@ -2,6 +2,7 @@
 
 ## Description
 This project asks the user to input their SummonerID for League of Legends and will compare their ranked win rate to a random Summoner in their same rank division.\
+\
 Using League of Legends API:
 https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries
 
