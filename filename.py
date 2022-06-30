@@ -3,6 +3,12 @@ import json
 import pandas as pd
 import sqlalchemy as db
 
+
+#create a function for user input, ask for rank and division
+#create a method that will create the url based on the rank, division, and api key and return the response
+#create a method that turns the .json to a data base
+
+
 url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/ \
        RANKED_SOLO_5x5/PLATINUM/IV?page=1&\
        api_key=RGAPI-5e9e49a2-a955-4ee5-b714-e9ac920fc59a"
@@ -27,3 +33,5 @@ df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
 query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
 print(pd.DataFrame(query_result))
 # converts pandas dataframe to a data base
+
+#sadfasfdsaf
