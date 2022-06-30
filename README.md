@@ -1,4 +1,5 @@
 # SEO Week 1 Project: LoL Wins & Losses
+Compare your League of Legends win rate with a random player.
 
 ## Description
 This project asks the user to input their SummonerID for League of Legends and will compare their ranked win rate to a random Summoner in their same rank division.\
