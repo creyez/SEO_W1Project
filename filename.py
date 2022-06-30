@@ -7,7 +7,7 @@ url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/P
 #update link every 24 hours because Development API Key resets
 
 response = requests.get(url)
-response = response.json()
+response = dict(response.json())
 
 print("SummonerName: " + response[0]["summonerName"])
 print("Wins: " + str(response[0]["wins"]))
