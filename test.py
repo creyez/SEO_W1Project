@@ -4,8 +4,7 @@ from lolWL import testFuction
 
 class test(unittest.TestCase):
     def test_function1(self):
-        input1, input2 = testFuction()
-        self.assertNotEqual(input1, None)
+        self.assertEqual(testFuction(0), 0)
 
 #     def test_function2(self):
 #         self.assertEqual(2 + 1, 3)
