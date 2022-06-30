@@ -11,9 +11,7 @@ def testFuction(inp1):
 #create a method that turns the .json to a data base
 
 
-url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/ \
-       RANKED_SOLO_5x5/PLATINUM/IV?page=1&\
-       api_key=RGAPI-5e9e49a2-a955-4ee5-b714-e9ac920fc59a"
+url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/PLATINUM/IV?page=1&api_key=RGAPI-5e9e49a2-a955-4ee5-b714-e9ac920fc59a"
 
 # url for League of Legends players that are ranked PLATNIUM IV
 # https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries
