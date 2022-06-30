@@ -3,6 +3,10 @@ import json
 import pandas as pd
 import sqlalchemy as db
 
+def testFuction():
+       input1 = input('Give input1')
+       input2 = input('Give input2')
+       return input1, input2
 
 #create a function for user input, ask for rank and division
 #create a method that will create the url based on the rank, division, and api key and return the response
@@ -33,8 +37,3 @@ df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
 query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
 print(pd.DataFrame(query_result))
 # converts pandas dataframe to a data base
-
-
-def testFuction(inp):
-       return inp
-
