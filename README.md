@@ -12,5 +12,17 @@ Uses the League of Legends API:
 * Used to get API Key (updates every 24 hours):
     * https://developer.riotgames.com/
 
+## Installation
+Uses the following libraries:
+* requests
+* pandas 
+* sqlalchemy 
+
+```bash
+python -m pip install requests
+pip3 install pandas
+pip install SQLAlchemy
+```
+
 
 ![example workflow](https://github.com/creyez/SEO_W1Project/actions/workflows/style.yaml/badge.svg)
