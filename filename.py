@@ -1,5 +1,6 @@
 import requests
 import json
+import pandas as pd
 import sqlalchemy as db
 
 url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/PLATINUM/IV?page=1&api_key=RGAPI-5e9e49a2-a955-4ee5-b714-e9ac920fc59a"
@@ -14,4 +15,10 @@ print("SummonerName: " + response[0]["summonerName"])
 print("Wins: " + str(response[0]["wins"]))
 print("Losses: " + str(response[0]["losses"]))
 
-# engine = db.create_engine('sqlite:///data_base_name.db')
+pd.DataFrame.from_dict(response)
+#converts dictionary into a pandas dataframe
+
+engine = db.create_engine('sqlite:///data_base_name.db')
+dataframe_name.to_sql('table_name', con=engine, if_exists='replace', index=False)
+query_result = engine.execute("SELECT * FROM table;").fetchall()
+print(pd.DataFrame(query_result))
