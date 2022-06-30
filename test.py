@@ -2,7 +2,7 @@ import unittest
 from lolWL import testFuction
 
 
-class TestFileName(unittest.TestCase):
+class test(unittest.TestCase):
     def test_function1(self):
         input1, input2 = testFuction()
         self.assertNotEqual(input1, None)
