@@ -9,4 +9,7 @@ url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/P
 response = requests.get(url)
 response = response.json()
 
-print(response[1]["summonerName"])
+print("SummonerName: " + response[0]["summonerName"])
+print("Wins: " + response[0]["wins"])
+print("Losses: " + response[0]["losses"])
+
