@@ -3,10 +3,8 @@ import json
 import pandas as pd
 import sqlalchemy as db
 
-def testFuction():
-       input1 = input('Give input1')
-       input2 = input('Give input2')
-       return input1, input2
+def testFuction(inp1):
+       return inp1
 
 # #create a function for user input, ask for rank and division
 # #create a method that will create the url based on the rank, division, and api key and return the response
