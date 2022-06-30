@@ -1,4 +1,5 @@
 import requests
+import json
 import sqlalchemy as db
 
 url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/PLATINUM/IV?page=1&api_key=RGAPI-5e9e49a2-a955-4ee5-b714-e9ac920fc59a"
@@ -7,12 +8,13 @@ url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/P
 #update link every 24 hours because Development API Key resets
 
 response = requests.get(url)
-response = dict(response.json())
+json_data = json.loads(response.text)
+#converts the request to a dictionary
 
-print("SummonerName: " + response[0]["summonerName"])
-print("Wins: " + str(response[0]["wins"]))
-print("Losses: " + str(response[0]["losses"]))
+print("SummonerName: " + json_data[0]["summonerName"])
+print("Wins: " + str(json_data[0]["wins"]))
+print("Losses: " + str(json_data[0]["losses"]))
 
-print(type(response))
+print(type(json_data))
 
 # engine = db.create_engine('sqlite:///data_base_name.db')
