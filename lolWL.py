@@ -1,4 +1,5 @@
 import requests
+import random
 import pandas as pd
 import sqlalchemy as db
 
@@ -7,33 +8,36 @@ def testFuction(inp1):
     return inp1
 
 
-APIKey = "RGAPI-15448d20-caa7-4173-8bbc-d6f432e8adf9"
+APIKey = "RGAPI-3562086f-2f45-405c-bdf5-0e19fb6ea621"
 id = input('Enter your League of Legends SummonerID: ')
 
 
 def getAccountID(idInput):
-      url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + str(idInput).replace(" ", "%20") + "?api_key=" + APIKey
-      response = requests.get(url)
-      response = response.json()
+    url = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" + str(idInput).replace(" ",
+                                                                                                    "%20") + "?api_key=" + APIKey
+    response = requests.get(url)
+    response = response.json()
 
-      if "status" in response:
-          newID = input('Summoner not found. Enter SummonerID: ')
-          getAccountID(newID)
-      else:
-          return response['id']
+    if "status" in response:
+        newID = input('Summoner not found. Enter SummonerID: ')
+        getAccountID(newID)
+    else:
+        return response['id']
 
 
 def getSummonerStats(accountIDInput):
-    url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + str(accountIDInput) + "?api_key=" + APIKey
+    url = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/" + str(
+        accountIDInput) + "?api_key=" + APIKey
     response = requests.get(url)
     response = response.json()
     return response
 
-def playsRanked(yourStats):
+
+def rankedSoloStats(yourStats):
     rankedSolo = False;
 
     if len(yourStats) == 0:
-        print("This player does not play ranked")
+        return []
 
     for queues in yourStats:
         if 'queueType' in queues:
@@ -42,52 +46,71 @@ def playsRanked(yourStats):
                 stats = queues
 
     if rankedSolo == True:
-        print("plays RankedSOLO")
+        return stats
     else:
-        print("does not play solo")
+        return []
 
+
+def getRandomPlayers(rSoloStats):
+    if len(rSoloStats) == 0:
+        print("This summoner has not played enough ranked solo recently")
+        return -1
+    else:
+        url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/" + rSoloStats['tier'] + "/" + \
+              rSoloStats['rank'] + "?page=1&api_key=" + APIKey
+        response = requests.get(url)
+        response = response.json()
+        return response
+
+
+def compareToRandom(yourStats, randomPlayers):
+    if len(yourStats) == 0:
+        return -1
+
+    randPlayer = randomPlayers[random.randint(0, len(randomPlayers) - 1)]
+
+    print()
+    print("Here are your stats:")
+    print("    SummonerName: " + yourStats["summonerName"])
+    print("    Wins: " + str(yourStats["wins"]))
+    print("    Losses: " + str(yourStats["losses"]))
+    print()
+    print("These are the stats of a random Summoner in the same division:")
+    print("    SummonerName: " + randPlayer["summonerName"])
+    print("    Wins: " + str(randPlayer["wins"]))
+    print("    Losses: " + str(randPlayer["losses"]))
+    print()
+
+    yWR = round(((yourStats["wins"] / (yourStats["losses"] + yourStats["wins"])) * 100), 2)
+    rWR = round(((randPlayer["wins"] / (randPlayer["losses"] + randPlayer["wins"])) * 100), 2)
+
+    print(
+        "You have a " + str(yWR) + "% win rate, compared to " + randPlayer[
+            "summonerName"] + "\'s " + str(rWR) + "% win rate")
+
+def createDataBase(randomPlayers):
+    if randomPlayers == -1:
+        return -1
+    df = pd.DataFrame.from_dict(randomPlayers)
+    # converts dictionary into a pandas dataframe
+
+    print()
+    print()
+    print("Here is a table of other random players in the same division:")
+    print()
+    print(df)
+    engine = db.create_engine('sqlite:///data_base_name.db')
+    df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
+    query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
+    # converts pandas dataframe to a data base
 
 
 accountID = getAccountID(id)
 accountInfo = getSummonerStats(accountID)
-print(accountInfo[0]['wins'])
-# playsRanked(accountInfo)
+rSoloStats = rankedSoloStats(accountInfo)
+randomSummoners = getRandomPlayers(rSoloStats)
+compareToRandom(rSoloStats, randomSummoners)
+createDataBase(randomSummoners)
 
 
 
-# print(accountInfo[0]['wins'])
-
-'''
-create a function for user input, 
-      ask for rank and division
-
-create a method that will create the url 
-      based on the rank, division, and 
-      api key and return the response
-      
-create a method that turns the .json to a data base
-'''
-
-
-url = "https://na1.api.riotgames.com/lol/league-exp/v4/entries/RANKED_SOLO_5x5/PLATINUM/IV?page=1&api_key=RGAPI-15448d20-caa7-4173-8bbc-d6f432e8adf9"
-
-# url for League of Legends players that are ranked PLATNIUM IV
-# https://developer.riotgames.com/apis#league-exp-v4/GET_getLeagueEntries
-# update link every 24 hours because Development API Key resets
-
-# response = requests.get(url)
-# response = response.json()
-#
-# print("SummonerName: " + response[0]["summonerName"])
-# print("Wins: " + str(response[0]["wins"]))
-# print("Losses: " + str(response[0]["losses"]))
-#
-# df = pd.DataFrame.from_dict(response)
-# # converts dictionary into a pandas dataframe
-# print(df)
-#
-# engine = db.create_engine('sqlite:///data_base_name.db')
-# df.to_sql('platPlayers', con=engine, if_exists='replace', index=False)
-# query_result = engine.execute("SELECT * FROM platPlayers;").fetchall()
-# print(pd.DataFrame(query_result))
-# # converts pandas dataframe to a data base
