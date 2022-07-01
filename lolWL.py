@@ -1,4 +1,3 @@
-import os
 import requests
 import pandas as pd
 import sqlalchemy as db
@@ -50,7 +49,6 @@ def playsRanked(yourStats):
 
 
 accountID = getAccountID(id)
-os.system("xEzTheKingx")
 accountInfo = getSummonerStats(accountID)
 print(accountInfo[0]['wins'])
 # playsRanked(accountInfo)
