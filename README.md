@@ -34,16 +34,19 @@ accountID = getAccountID(id)
 # returns account info (including rank, wins, losses) based on encrypted ID
 accountInfo = getSummonerStats(accountID)
 
-# returns the ranked Solo stats of the given player or an empty list if the player has not played ranked solo recently
+# returns the ranked Solo stats of the given player 
+# or an empty list if the player has not played ranked solo recently
 rSoloStats = rankedSoloStats(accountInfo)
 
 # returns a dictionary of random players in the same ranking as the given player
 randomSummoners = getRandomPlayers(rSoloStats)
 
-# prints messages comparing the stats of a random player's and the given player's ranked solo performance
+# prints messages comparing the stats of a random player's
+# and the given player's ranked solo performance
 compareToRandom(rSoloStats, randomSummoners)
 
-# prints a dataframe of random players in the same ranking and creates a database with the same information
+# prints a dataframe of random players in the same ranking
+# and creates a database with the same information
 createDataBase(randomSummoners)
 ```
 
