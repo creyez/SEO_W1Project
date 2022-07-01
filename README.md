@@ -2,7 +2,7 @@
 Compare your League of Legends win rate with a random player.
 
 ## Description
-This project asks the user to input their SummonerID for League of Legends and will compare their ranked win rate to a random Summoner in their same rank division.\
+This project asks the user to input their SummonerID for League of Legends and compares their ranked solo win rate to a random Summoner in the same division.\
 \
 Uses the League of Legends API:
 * Used to get the wins and losses of a random summoner:
